@@ -1,15 +1,34 @@
 package com.yang.nbaplayerapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-public @Data class Player {
 
+@Data
+public class Player {
+
+    @JsonProperty("firstName")
     String firstName;
+
+    @JsonProperty("lastName")
     String lastName;
-    int personId;
-    String yearsPro;
-    String heightFeet;
-    String heightInches;
+
+    @JsonProperty("personId")
+    String personId;
+
     /** jersey number **/
-    int jersey;
+    @JsonProperty("jersey")
+    String jersey;
+
+    @JsonProperty("pos")
+    String position;
+
+    @JsonProperty("heightFeet")
+    String heightFeet;
+
+    @JsonProperty("heightInches")
+    String heightInches;
+
+    @JsonProperty("yearsPro")
+    String yearsPro;
 }
