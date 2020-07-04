@@ -3,9 +3,8 @@ package com.yang.nbaplayerapi.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-
 @Data
-public class Player {
+public class PlayerInfo {
 
     @JsonProperty("firstName")
     String firstName;

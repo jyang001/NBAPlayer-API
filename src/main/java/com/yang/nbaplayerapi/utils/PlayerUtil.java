@@ -3,10 +3,9 @@ package com.yang.nbaplayerapi.utils;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yang.nbaplayerapi.model.Player;
+import com.yang.nbaplayerapi.model.PlayerInfo;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -21,10 +20,10 @@ public final class PlayerUtil {
 
     }
 
-    public static List<Player> getPlayers(String inputUrl) {
+    public static List<PlayerInfo> getPlayers(String inputUrl) {
 
-        Set<Player> myPlayers = new HashSet<>();
-        List<Player> players = new ArrayList<>();
+        Set<PlayerInfo> myPlayerInfos = new HashSet<>();
+        List<PlayerInfo> playerInfos = new ArrayList<>();
 
         String parseUrl = startUrl+inputUrl;
 
@@ -40,14 +39,14 @@ public final class PlayerUtil {
             Iterator<JsonNode> iterator = standardNode.elements();
             while (iterator.hasNext()) {
                 JsonNode node = iterator.next();
-                Player player = objectMapper.treeToValue(node, Player.class);
-                players.add(player);
+                PlayerInfo playerInfo = objectMapper.treeToValue(node, PlayerInfo.class);
+                playerInfos.add(playerInfo);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return players;
+        return playerInfos;
     }
 
 
