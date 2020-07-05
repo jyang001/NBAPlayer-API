@@ -20,10 +20,9 @@ public final class PlayerUtil {
 
     }
 
-    public static List<PlayerInfo> getPlayers(String inputUrl) {
+    public static Set<PlayerInfo> getPlayers(String inputUrl) {
 
-        Set<PlayerInfo> myPlayerInfos = new HashSet<>();
-        List<PlayerInfo> playerInfos = new ArrayList<>();
+        Set<PlayerInfo> playerInfos = new HashSet<>();
 
         String parseUrl = startUrl+inputUrl;
 
