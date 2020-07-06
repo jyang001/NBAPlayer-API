@@ -2,6 +2,7 @@ package com.yang.nbaplayerapi.controller;
 
 import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.utils.PlayerUtil;
+import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +24,15 @@ public class PlayerController {
 
     @GetMapping(path="/api/players")
     @ResponseStatus(HttpStatus.OK)
-    public Set<PlayerInfo> getPlayers() {
+    public PlayerCollection getPlayers() {
         Set<PlayerInfo> playerInfos = new HashSet<>();
+        PlayerCollection playerCollection = new PlayerCollection();
+
         String query = "2019/players.json";
         playerInfos = PlayerUtil.getPlayers(query);
-        return playerInfos;
+        playerCollection.setPlayerInfo(playerInfos);
+
+        return playerCollection;
     }
 
 }
