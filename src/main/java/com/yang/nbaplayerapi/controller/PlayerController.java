@@ -32,11 +32,9 @@ public class PlayerController {
     public PlayerCollection getPlayers() {
         Set<PlayerInfo> playerInfos = new HashSet<>();
         PlayerCollection playerCollection = new PlayerCollection();
-
         String query = "2019/players.json";
         playerInfos = PlayerUtil.getPlayers(query);
         playerCollection.setPlayerInfo(playerInfos);
-
         return playerCollection;
     }
 
