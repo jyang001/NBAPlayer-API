@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yang</groupId>
-	<artifactId>nba-player-api</artifactId>
+	<artifactId>nba-playerInfo-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nba-player-api</name>
-	<description>NBA player API</description>
+	<name>nba-playerInfo-api</name>
+	<description>NBA playerInfo API</description>
 
 	<properties>
 		<java.version>1.8</java.version>
