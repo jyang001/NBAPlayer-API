@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class NbaPlayerApiApplication {
 
 	@Bean
-	public RestTemplate getRestTempalte() {
+	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
 
