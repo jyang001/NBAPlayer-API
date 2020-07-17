@@ -1,5 +1,6 @@
 package com.yang.nbaplayerapi.controller;
 
+import com.yang.nbaplayerapi.service.PlayerService;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class PlayerController {
 
     @Autowired
-    RestTemplate restTemplate;
+    PlayerService playerService;
 
     @GetMapping("/api/ping")
     public ResponseEntity<String> pingTest() {
@@ -24,8 +25,7 @@ public class PlayerController {
     @GetMapping(path="/api/players")
     @ResponseStatus(HttpStatus.OK)
     public PlayerCollection getPlayers() {
-        PlayerCollection playerCollection = restTemplate.getForObject("http://data.nba.net/prod/v1/2019/players.json", PlayerCollection.class);
-        return playerCollection;
+        return playerService.getAllPlayers();
     }
 
 }
