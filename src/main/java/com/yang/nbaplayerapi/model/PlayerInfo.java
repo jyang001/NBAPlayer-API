@@ -49,8 +49,13 @@ public class PlayerInfo {
         else {
             this.heightMeters = heightMeters;
             double tempHeightMeters = Double.parseDouble(heightMeters);
-            setHeightCentimeters(Double.toString(tempHeightMeters * 100));
+            setHeightCentimeters(roundTwoDecimalPlaces(tempHeightMeters*100));
         }
+    }
+
+    private String roundTwoDecimalPlaces(double input) {
+        int tempHeightCent = (int) input;
+        return Integer.toString(tempHeightCent);
     }
 
 }
