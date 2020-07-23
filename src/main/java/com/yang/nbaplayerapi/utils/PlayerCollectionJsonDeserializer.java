@@ -9,7 +9,7 @@ import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCollection> {
 
@@ -28,9 +28,9 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
         JsonNode standardNode = leagueNode.path("standard"); //an array
 
         String test = standardNode.toString(); //players json as string
-        Set<PlayerInfo> set = objectMapper.readValue(test, new TypeReference<Set<PlayerInfo>>(){});
+        List<PlayerInfo> playerInfos = objectMapper.readValue(test, new TypeReference<List<PlayerInfo>>(){});
 
-        playerCollection.setPlayerInfo(set);
+        playerCollection.setPlayerInfo(playerInfos);
 
         return playerCollection;
     }

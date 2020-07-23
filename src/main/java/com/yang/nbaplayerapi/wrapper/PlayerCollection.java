@@ -5,11 +5,11 @@ import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.utils.PlayerCollectionJsonDeserializer;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @JsonDeserialize( using = PlayerCollectionJsonDeserializer.class)
 public class PlayerCollection {
 
-    private Set<PlayerInfo> playerInfo;
+    private List<PlayerInfo> playerInfo;
 }
