@@ -22,17 +22,17 @@ public class PlayerService {
         return restTemplate.getForObject("http://data.nba.net/prod/v1/2019/players.json", PlayerCollection.class);
     }
 
-    public PlayerCollection getOrderedPlayers(String orderBy, String direction) {
-        _playerCollection = getAllPlayers();
-        List<PlayerInfo> playerList = _playerCollection.getPlayerInfo();
+    public PlayerCollection getSortedPlayers(String sortBy) {
+        PlayerCollection playerCollection = getAllPlayers();
+        List<PlayerInfo> playerList = playerCollection.getPlayerInfo();
 
-        switch(orderBy) {
+        switch(sortBy) {
             case "firstname":
                 Collections.sort(playerList, new FirstNameComparator());
             default:
         }
-        _playerCollection.setPlayerInfo(playerList);
-        return _playerCollection;
+        playerCollection.setPlayerInfo(playerList);
+        return playerCollection;
     }
 
 }
