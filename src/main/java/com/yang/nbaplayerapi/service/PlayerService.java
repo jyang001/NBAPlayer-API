@@ -30,9 +30,25 @@ public class PlayerService {
             case "firstname":
                 Collections.sort(playerList, new FirstNameComparator());
             default:
+                //return error
         }
         playerCollection.setPlayerInfo(playerList);
         return playerCollection;
+    }
+
+    public PlayerCollection getSortedPlayers(String sortBy, String direction) {
+        PlayerCollection playerCollection = getSortedPlayers(sortBy);
+        return orderPlayers(playerCollection, direction);
+    }
+
+    private PlayerCollection orderPlayers(PlayerCollection playerCollection, String direction) {
+        PlayerCollection myPlayerCollection =  playerCollection;
+        if (direction.equals("asc")) {
+            List<PlayerInfo> playerInfos = myPlayerCollection.getPlayerInfo();
+            Collections.reverse(playerInfos);
+            myPlayerCollection.setPlayerInfo(playerInfos);
+        }
+        return myPlayerCollection;
     }
 
 }
