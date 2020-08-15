@@ -25,17 +25,19 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
 
         JsonNode resultsNode = jsonParser.readValueAsTree();
         JsonNode leagueNode = resultsNode.path("league");
-        JsonNode standardNode = leagueNode.path("standard"); //an array
+        JsonNode standardNode = leagueNode.path("standard");
 
-        String test = standardNode.toString(); //players json as string
+        String test = standardNode.toString();
         List<PlayerInfo> playerInfos = objectMapper.readValue(test, new TypeReference<List<PlayerInfo>>(){});
+
+        removeInactivePlayers(playerInfos);
 
         playerCollection.setPlayerInfo(playerInfos);
 
         return playerCollection;
     }
 
-    public void setUpObjectMapper() throws Exception {
+    private void setUpObjectMapper() throws Exception {
         objectMapper = new ObjectMapper();
         objectMapper.disable(MapperFeature.AUTO_DETECT_CREATORS,
                 MapperFeature.AUTO_DETECT_FIELDS,
@@ -43,6 +45,10 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
                 MapperFeature.AUTO_DETECT_IS_GETTERS);
 
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
+
+    private void removeInactivePlayers(List<PlayerInfo> playerInfoList) {
+        playerInfoList.removeIf(playerInfo -> playerInfo.getYearsPro() == "");
     }
 
 }
