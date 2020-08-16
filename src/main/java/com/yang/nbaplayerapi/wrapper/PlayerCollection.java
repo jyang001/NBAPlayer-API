@@ -11,5 +11,5 @@ import java.util.List;
 @JsonDeserialize( using = PlayerCollectionJsonDeserializer.class)
 public class PlayerCollection {
 
-    private List<PlayerInfo> playerInfo;
+    private List<PlayerInfo> playerInfoList;
 }
