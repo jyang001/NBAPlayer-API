@@ -40,6 +40,7 @@ public class PlayerService {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
+        //manages 'direction' parameter
         if(direction != null && !direction.equals("asc") && !direction.equals("desc")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
