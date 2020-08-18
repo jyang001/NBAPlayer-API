@@ -40,7 +40,10 @@ public class PlayerService {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        if(direction != null) {
+        if(direction != null && !direction.equals("asc") && !direction.equals("desc")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        else if (direction != null) {
             playerList = orderPlayers(playerList, direction);
         }
 
