@@ -20,8 +20,12 @@ public class PlayerController {
         return new ResponseEntity<>("success: true", HttpStatus.OK);
     }
 
-    @GetMapping(path="/api/players")
-    public ResponseEntity<PlayerCollection> getAllPlayers(@RequestParam(value="sortBy", required = false) String sortBy) {
-        return playerService.getPlayers(sortBy);
+    @GetMapping("players")
+    public ResponseEntity<PlayerCollection> getAllPlayers(
+            @RequestParam(value="sortBy", required = false) String sortBy,
+            @RequestParam(value="direction", required = false) String direction)
+    {
+        return playerService.getPlayers(sortBy,direction);
     }
+    
 }

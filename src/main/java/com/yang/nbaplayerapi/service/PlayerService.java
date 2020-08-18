@@ -22,7 +22,8 @@ public class PlayerService {
         return restTemplate.getForObject("http://data.nba.net/prod/v1/2019/players.json", PlayerCollection.class);
     }
 
-    public ResponseEntity<PlayerCollection> getPlayers(String sortBy) {
+    public ResponseEntity<PlayerCollection> getPlayers(String sortBy, String direction) {
+
         PlayerCollection playerCollection = getPlayers();
 
         if (sortBy == null) {
@@ -38,22 +39,21 @@ public class PlayerService {
             default:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+
+        if(direction != null) {
+            playerList = orderPlayers(playerList, direction);
+        }
+
         playerCollection.setPlayerInfoList(playerList);
         return ResponseEntity.ok().body(playerCollection);
     }
 
-/*    public PlayerCollection getPlayers(String sortBy, String direction) {
-        PlayerCollection playerCollection = getPlayers(sortBy);
-        return orderPlayers(playerCollection, direction);
-    }*/
 
-    private PlayerCollection orderPlayers(PlayerCollection playerCollection, String direction) {
+    private List<PlayerInfo> orderPlayers(List<PlayerInfo> playerInfoList, String direction) {
         if (direction.equals("asc")) {
-            List<PlayerInfo> playerInfos = playerCollection.getPlayerInfoList();
-            Collections.reverse(playerInfos);
-            playerCollection.setPlayerInfoList(playerInfos);
+            Collections.reverse(playerInfoList);
         }
-        return playerCollection;
+        return playerInfoList;
     }
 
 }
