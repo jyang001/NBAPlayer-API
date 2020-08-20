@@ -1,6 +1,6 @@
 package com.yang.nbaplayerapi.service;
 
-import com.yang.nbaplayerapi.comparator.FirstNameComparator;
+import com.yang.nbaplayerapi.comparator.*;
 import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,18 @@ public class PlayerService {
             case "firstname":
                 playerList.sort(new FirstNameComparator());
                 break;
+            case "height":
+                playerList.sort(new HeightComparator());
+                break;
+            case "lastname":
+                playerList.sort(new LastNameComparator());
+                break;
+            case "playerid":
+                playerList.sort(new PlayerIdComparator());
+                break;
+            case "yearspro":
+                playerList.sort(new YearsProComparator());
+                break;
             default:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
@@ -51,7 +63,6 @@ public class PlayerService {
         playerCollection.setPlayerInfoList(playerList);
         return ResponseEntity.ok().body(playerCollection);
     }
-
 
     private List<PlayerInfo> orderPlayers(List<PlayerInfo> playerInfoList, String direction) {
         if (direction.equals("asc")) {
