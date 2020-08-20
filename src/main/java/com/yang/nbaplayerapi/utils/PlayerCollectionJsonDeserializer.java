@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCollection> {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @SneakyThrows
     @Override
@@ -37,7 +37,6 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
     }
 
     private void setUpObjectMapper() throws Exception {
-        objectMapper = new ObjectMapper();
         objectMapper.disable(MapperFeature.AUTO_DETECT_CREATORS,
                 MapperFeature.AUTO_DETECT_FIELDS,
                 MapperFeature.AUTO_DETECT_GETTERS,
