@@ -71,4 +71,20 @@ public class PlayerService {
         return playerInfoList;
     }
 
+    public ResponseEntity<PlayerInfo> getPlayer(String firstName, String lastName) {
+        PlayerCollection playerCollection = restTemplate.getForObject("http://data.nba.net/prod/v1/2019/players.json", PlayerCollection.class);
+        assert playerCollection != null;
+        for (PlayerInfo playerInfo : playerCollection.getPlayerInfoList()){
+            String playerFirstName = playerInfo.getFirstName().toLowerCase();
+            String playerLastName = playerInfo.getLastName().toLowerCase();
+            if(playerFirstName.equals(firstName) && playerLastName.equals(lastName)) {
+                return ResponseEntity.ok().body(playerInfo);
+            }
+        }
+        //add 'error msg that player with that name is invalid'
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+
+
 }
