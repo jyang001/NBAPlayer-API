@@ -1,5 +1,6 @@
 package com.yang.nbaplayerapi.controller;
 
+import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.service.PlayerService;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,14 @@ public class PlayerController {
             @RequestParam(value="direction", required = false) String direction)
     {
         return playerService.getPlayers(sortBy,direction);
+    }
+
+    @GetMapping("player")
+    public ResponseEntity<PlayerInfo> getOnePlayer(
+            @RequestParam(value="firstName") String firstName,
+            @RequestParam(value="lastName") String lastName)
+    {
+        return playerService.getPlayer(firstName,lastName);
     }
     
 }
