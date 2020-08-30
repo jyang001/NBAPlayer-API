@@ -57,18 +57,17 @@ public class PlayerService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         else if (direction != null) {
-            playerList = orderPlayers(playerList, direction);
+            orderPlayers(playerList, direction);
         }
 
         playerCollection.setPlayerInfoList(playerList);
         return ResponseEntity.ok().body(playerCollection);
     }
 
-    private List<PlayerInfo> orderPlayers(List<PlayerInfo> playerInfoList, String direction) {
+    private void orderPlayers(List<PlayerInfo> playerInfoList, String direction) {
         if (direction.equals("asc")) {
             Collections.reverse(playerInfoList);
         }
-        return playerInfoList;
     }
 
     public ResponseEntity<PlayerInfo> getPlayer(String firstName, String lastName) {
