@@ -1,6 +1,7 @@
 package com.yang.nbaplayerapi.service;
 
 import com.yang.nbaplayerapi.comparator.*;
+import com.yang.nbaplayerapi.exception.PlayerNotFoundException;
 import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class PlayerService {
         return restTemplate.getForObject("http://data.nba.net/prod/v1/2019/players.json", PlayerCollection.class);
     }
 
-    public ResponseEntity<PlayerCollection> getPlayers(String sortBy, String direction) {
+    public PlayerCollection getPlayers(String sortBy, String direction) {
 
         PlayerCollection playerCollection = getPlayers();
 
         if (sortBy == null) {
-            return ResponseEntity.ok().body(playerCollection);
+            return playerCollection;
         }
 
         List<PlayerInfo> playerList = playerCollection.getPlayerInfoList();
@@ -49,19 +50,19 @@ public class PlayerService {
                 playerList.sort(new YearsProComparator());
                 break;
             default:
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                throw new PlayerNotFoundException("sortBy parameter is invalid");
         }
 
         //manages 'direction' parameter
         if(direction != null && !direction.equals("asc") && !direction.equals("desc")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw new PlayerNotFoundException("direction parameter is invalid");
         }
         else if (direction != null) {
             orderPlayers(playerList, direction);
         }
 
         playerCollection.setPlayerInfoList(playerList);
-        return ResponseEntity.ok().body(playerCollection);
+        return playerCollection;
     }
 
     private void orderPlayers(List<PlayerInfo> playerInfoList, String direction) {

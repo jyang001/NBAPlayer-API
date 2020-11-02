@@ -26,7 +26,8 @@ public class PlayerController {
             @RequestParam(value="sortBy", required = false) String sortBy,
             @RequestParam(value="direction", required = false) String direction)
     {
-        return playerService.getPlayers(sortBy,direction);
+        PlayerCollection playerCollection = playerService.getPlayers(sortBy,direction);
+        return ResponseEntity.ok().body(playerCollection);
     }
 
     @GetMapping("player")
