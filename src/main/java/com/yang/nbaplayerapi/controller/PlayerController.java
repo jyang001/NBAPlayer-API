@@ -21,7 +21,7 @@ public class PlayerController {
         return new ResponseEntity<>("success: true", HttpStatus.OK);
     }
 
-    @GetMapping("players")
+    @GetMapping("/players")
     public ResponseEntity<PlayerCollection> getAllPlayers(
             @RequestParam(value="sortBy", required = false) String sortBy,
             @RequestParam(value="direction", required = false) String direction)
@@ -30,7 +30,7 @@ public class PlayerController {
         return ResponseEntity.ok().body(playerCollection);
     }
 
-    @GetMapping("player")
+    @GetMapping("/player")
     public ResponseEntity<PlayerInfo> getOnePlayer(
             @RequestParam(value="firstName") String firstName,
             @RequestParam(value="lastName") String lastName)
