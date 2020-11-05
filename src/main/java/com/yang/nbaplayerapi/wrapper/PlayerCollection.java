@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@JsonDeserialize( using = PlayerCollectionJsonDeserializer.class)
+@JsonDeserialize(using = PlayerCollectionJsonDeserializer.class)
 public class PlayerCollection {
 
     private List<PlayerInfo> playerInfoList;

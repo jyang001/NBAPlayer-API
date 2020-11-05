@@ -3,7 +3,6 @@ package com.yang.nbaplayerapi.controller;
 import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.service.PlayerService;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PlayerController {
 
-    @Autowired
     PlayerService playerService;
 
     @GetMapping("/api/ping")
@@ -24,7 +22,7 @@ public class PlayerController {
 
     @GetMapping("/players")
     public ResponseEntity<PlayerCollection> getAllPlayers(
-            @RequestParam(value="year", required = true) int year,
+            @RequestParam(value="year") int year,
             @RequestParam(value="sortBy", required = false) String sortBy,
             @RequestParam(value="direction", required = false) String direction)
     {
