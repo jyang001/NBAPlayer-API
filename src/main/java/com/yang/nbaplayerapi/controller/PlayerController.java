@@ -4,6 +4,7 @@ import com.yang.nbaplayerapi.model.PlayerInfo;
 import com.yang.nbaplayerapi.service.PlayerService;
 import com.yang.nbaplayerapi.wrapper.PlayerCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,19 +24,24 @@ public class PlayerController {
 
     @GetMapping("/players")
     public ResponseEntity<PlayerCollection> getAllPlayers(
+            @RequestParam(value="year", required = true) int year,
             @RequestParam(value="sortBy", required = false) String sortBy,
             @RequestParam(value="direction", required = false) String direction)
     {
-        PlayerCollection playerCollection = playerService.getPlayers(sortBy,direction);
-        return ResponseEntity.ok().body(playerCollection);
+        PlayerCollection playerCollection = playerService.getPlayers(year, sortBy, direction);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        return new ResponseEntity<>(playerCollection, headers, HttpStatus.OK);
     }
 
     @GetMapping("/player")
     public ResponseEntity<PlayerInfo> getOnePlayer(
+            @RequestParam(value="year") int year,
             @RequestParam(value="firstName") String firstName,
             @RequestParam(value="lastName") String lastName)
     {
-        return playerService.getPlayer(firstName,lastName);
+        return playerService.getPlayer(year,firstName,lastName);
     }
     
 }

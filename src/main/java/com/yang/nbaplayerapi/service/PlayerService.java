@@ -19,13 +19,13 @@ public class PlayerService {
     @Autowired
     RestTemplate restTemplate;
 
-    public PlayerCollection getPlayers() {
-        return restTemplate.getForObject("http://data.nba.net/prod/v1/2018/players.json", PlayerCollection.class);
+    public PlayerCollection getPlayers(int year) {
+        return restTemplate.getForObject("http://data.nba.net/prod/v1/" + year + "/players.json", PlayerCollection.class);
     }
 
-    public PlayerCollection getPlayers(String sortBy, String direction) {
+    public PlayerCollection getPlayers(int year, String sortBy, String direction) {
 
-        PlayerCollection playerCollection = getPlayers();
+        PlayerCollection playerCollection = getPlayers(year);
         if (sortBy == null) {
             return playerCollection;
         }
@@ -70,8 +70,8 @@ public class PlayerService {
         }
     }
 
-    public ResponseEntity<PlayerInfo> getPlayer(String firstName, String lastName) {
-        PlayerCollection playerCollection = getPlayers();
+    public ResponseEntity<PlayerInfo> getPlayer(int year, String firstName, String lastName) {
+        PlayerCollection playerCollection = getPlayers(year);
         assert playerCollection != null;
         for (PlayerInfo playerInfo : playerCollection.getPlayerInfoList()){
             String playerFirstName = playerInfo.getFirstName().toLowerCase();
