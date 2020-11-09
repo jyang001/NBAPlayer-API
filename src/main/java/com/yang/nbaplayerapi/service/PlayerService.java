@@ -79,8 +79,8 @@ public class PlayerService {
             if(playerFirstName.equals(firstName) && playerLastName.equals(lastName)) {
                 return ResponseEntity.ok().body(playerInfo);
             }
+            throw new PlayerNotFoundException("Player with the given firstName and lastName not found");
         }
-        //add 'error msg that player with that name is invalid'
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
