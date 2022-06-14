@@ -12,4 +12,8 @@ import java.util.List;
 public class PlayerCollection {
 
     private List<PlayerInfo> playerInfoList;
+
+    public int size() {
+        return playerInfoList.size();
+    }
 }
