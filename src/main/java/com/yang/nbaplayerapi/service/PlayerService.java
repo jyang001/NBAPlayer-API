@@ -20,12 +20,13 @@ public class PlayerService {
     RestTemplate restTemplate;
 
     public PlayerCollection getPlayers(int year) {
-        return restTemplate.getForObject("http://data.nba.net/prod/v1/" + year + "/players.json", PlayerCollection.class);
+        return restTemplate.getForObject("https://data.nba.net/prod/v1/" + year + "/players.json", PlayerCollection.class);
     }
 
     public PlayerCollection getPlayers(int year, String sortBy, String direction) {
 
         PlayerCollection playerCollection = getPlayers(year);
+
         if (sortBy == null) {
             return playerCollection;
         }
