@@ -30,8 +30,11 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
         String stringValuesOfJson = standardNode.toString();
         List<PlayerInfo> playerInfos = objectMapper.readValue(stringValuesOfJson, new TypeReference<List<PlayerInfo>>(){});
 
-        removeInactivePlayers(playerInfos);
+        System.out.println("Jackson deserializer playerinfo1 \n"+
+                playerInfos);
+
         playerCollection.setPlayerInfoList(playerInfos);
+
 
         return playerCollection;
     }
@@ -45,8 +48,8 @@ public class PlayerCollectionJsonDeserializer extends JsonDeserializer<PlayerCol
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
-    private void removeInactivePlayers(List<PlayerInfo> playerInfoList) {
-        playerInfoList.removeIf(playerInfo -> playerInfo.getYearsPro().equals(""));
-    }
+//    private void removeInactivePlayers(List<PlayerInfo> playerInfoList) {
+//        playerInfoList.removeIf(playerInfo -> playerInfo.getYearsPro().equals(""));
+//    }
 
 }
